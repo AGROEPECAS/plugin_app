@@ -1,0 +1,211 @@
+Fluxo visual da lógica do plugin
+
+[Shortcode chamado no WP]
+        |
+        v
+Recebe atributos (nome, tabela, planilha, aba, fonte)
+        |
+        v
+Conecta ao banco WP via $wpdb
+        |
+        +--> Lê lista distinta de OEM  (SELECT DISTINCT oem...)
+        |
+        +--> Lê lista distinta de OES  (SELECT DISTINCT oes...)
+        |
+        v
+[Usuário envia filtros via GET]
+        |
+        +--> Se "search_oem" preenchido   -> adiciona ao WHERE
+        |
+        +--> Se "codes_oem" preenchido    -> quebra linhas > cria LIKE no WHERE
+        |
+        +--> Se "search_oes" preenchido   -> adiciona ao WHERE
+        |
+        +--> Se "codes_oes" preenchido    -> quebra linhas > cria LIKE no WHERE
+        |
+        v
+Monta consulta SQL com WHERE + parâmetros
+        |
+        v
+Executa SELECT na tabela indicada no shortcode
+        |
+        v
+Gera array de resultados
+        |
+        v
+Monta HTML com:
+   - Formulário de busca (OEM/OES + múltiplos códigos)
+   - Lista de resultados em tabela
+        |
+        v
+Retorna o HTML para exibição no lugar do shortcode
+
+
+__________________________________________________________________
+
+
+desenho ASCII detalhando a interação entre usuário, formulário, e banco de dados
+
+
+         ┌─────────────────────────────┐
+         │ Usuário acessa página WP    │
+         │ com [shortcode] inserido    │
+         └───────────────┬─────────────┘
+                         │
+                         v
+         ┌────────────────────────────────┐
+         │ Shortcode executa função PHP    │
+         │ (consulta_pecas_shortcode)      │
+         └──────────────────┬─────────────┘
+                            │
+                Lê atributos passados no shortcode
+               (nome, tabela, planilha, aba, fonte)
+                            │
+                            v
+              ┌───────────────────────────────┐
+              │ Conecta ao banco ($wpdb)       │
+              │ Lê lista de OEM e OES distintos│
+              └─────────────────┬─────────────┘
+                                │
+                                v
+                    ┌───────────────────────┐
+                    │ Monta formulário HTML  │
+                    │ (campos OEM, OES,      │
+                    │  códigos múltiplos)    │
+                    └───────────┬───────────┘
+                                │
+            [Se usuário envia formulário via GET]
+                                │
+                                v
+       ┌──────────────────────────────────────────────────┐
+       │ Monta cláusulas WHERE a partir dos filtros:       │
+       │  - search_oem   → WHERE oem = ...                 │
+       │  - codes_oem    → WHERE oem_code LIKE ...         │
+       │  - search_oes   → WHERE oes = ...                 │
+       │  - codes_oes    → WHERE oes_code LIKE ...         │
+       └──────────────────────┬───────────────────────────┘
+                               │
+                               v
+                ┌─────────────────────────────────┐
+                │ Executa SELECT na tabela definida│
+                │ pelo atributo "tabela" do shortcode│
+                └──────────────────┬────────────────┘
+                                   │
+                                   v
+                        ┌───────────────────────┐
+                        │ Recebe resultados     │
+                        │ (array de registros)  │
+                        └───────────┬───────────┘
+                                    │
+                                    v
+                     ┌──────────────────────────────┐
+                     │ Monta tabela HTML de saída    │
+                     │ com os resultados encontrados │
+                     └───────────┬──────────────────┘
+                                 │
+                                 v
+               ┌──────────────────────────────────┐
+               │ Retorna HTML final para o WP      │
+               │ que substitui o shortcode na página│
+               └──────────────────────────────────┘
+
+
+____________________________________________________________________________
+
+versão simplificada
+
+[Shortcode na página]
+   |
+   v
+Plugin lê qual tabela deve usar
+   |
+   v
+Busca lista de fabricantes (OEM) e fornecedores (OES)
+   |
+   v
+Mostra formulário para o usuário escolher filtros
+   |
+   v
+Usuário preenche e envia
+   |
+   v
+Plugin monta a busca com base nos filtros
+   |
+   v
+Consulta a tabela no banco de dados
+   |
+   v
+Recebe os resultados encontrados
+   |
+   v
+Monta uma tabela HTML bonitinha
+   |
+   v
+Mostra na tela no lugar do shortcode
+
+
+____________________________________________________________
+
+Exemplo: [consulta_pecas nome="Conversão CARRARO" fonte="tabela" planilha="https://docs.google.com/spreadsheets/d/1PqdiBHw2rU0LNxdrFh2cj7flo8j49rPUIYJjMUuDRaQ/edit" tabela="wp_conversor_carraro" aba="AGROEPECAS-CARRARO"]
+
+
+[Página do WordPress]
+   |
+   v
+Shortcode encontrado:
+[consulta_pecas 
+    nome="Conversão CARRARO" 
+    fonte="tabela" 
+    planilha="https://docs.google.com/.../edit" 
+    tabela="wp_conversor_carraro" 
+    aba="AGROEPECAS-CARRARO"
+]
+   |
+   v
+Plugin executa função consulta_pecas_shortcode()
+   |
+   v
+Lê atributos do shortcode:
+   - nome      = "Conversão CARRARO"
+   - fonte     = "tabela"
+   - planilha  = link Google Sheets (uso futuro)
+   - tabela    = "wp_conversor_carraro"
+   - aba       = "AGROEPECAS-CARRARO"
+   |
+   v
+Conecta no banco de dados WordPress ($wpdb)
+   |
+   +--> Busca todos os fabricantes OEM da tabela "wp_conversor_carraro"
+   |
+   +--> Busca todos os fornecedores OES da tabela "wp_conversor_carraro"
+   |
+   v
+Monta e exibe formulário HTML:
+   - Campo seleção OEM
+   - Campo seleção OES
+   - Campo para colar vários códigos OEM
+   - Campo para colar vários códigos OES
+   - Botão "Pesquisar"
+   |
+   v
+[Usuário envia filtros via GET]
+   |
+   v
+Plugin monta consulta SQL:
+   SELECT * FROM wp_conversor_carraro
+   WHERE [condições OEM/OES/códigos conforme filtros]
+   |
+   v
+Executa a consulta no banco
+   |
+   v
+Recebe lista de resultados (linhas da tabela wp_conversor_carraro)
+   |
+   v
+Monta tabela HTML com os resultados
+   |
+   v
+Mostra tabela na página no lugar do shortcode
+
+
+
