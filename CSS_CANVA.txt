@@ -1,0 +1,916 @@
+/* AGRO&PEÇAS App - Professional Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --agroepecas-primary: #EE8800;
+    --agroepecas-primary-dark: #d67600;
+    --agroepecas-secondary: #221300;
+    --agroepecas-header-bg: #171616;
+    --agroepecas-success: #10b981;
+    --agroepecas-warning: #f59e0b;
+    --agroepecas-error: #ef4444;
+    --agroepecas-gray-50: #f9fafb;
+    --agroepecas-gray-100: #f3f4f6;
+    --agroepecas-gray-200: #e5e7eb;
+    --agroepecas-gray-300: #d1d5db;
+    --agroepecas-gray-400: #9ca3af;
+    --agroepecas-gray-500: #6b7280;
+    --agroepecas-gray-600: #4b5563;
+    --agroepecas-gray-700: #374151;
+    --agroepecas-gray-800: #1f2937;
+    --agroepecas-gray-900: #111827;
+}
+
+/* Reset and Base Styles */
+.agroepecas-app * {
+    box-sizing: border-box;
+}
+
+.agroepecas-app {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, var(--agroepecas-gray-50) 0%, var(--agroepecas-gray-100) 100%);
+    color: var(--agroepecas-secondary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styles */
+.agroepecas-header {
+    background: linear-gradient(135deg, var(--agroepecas-header-bg) 0%, #2d2d2d 100%);
+    padding: 1.5rem 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+.agroepecas-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.02)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+
+.agroepecas-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.agroepecas-header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .agroepecas-header-content {
+        flex-direction: row;
+        gap: 2rem;
+    }
+}
+
+.agroepecas-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.agroepecas-logo {
+    height: 80px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
+}
+
+.agroepecas-logo:hover {
+    transform: scale(1.05);
+}
+
+.agroepecas-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.025em;
+}
+
+@media (min-width: 768px) {
+    .agroepecas-title {
+        font-size: 2.25rem;
+        text-align: left;
+    }
+}
+
+/* Main Content */
+.agroepecas-main {
+    flex-grow: 1;
+    padding: 2rem 0;
+}
+
+/* Section Styles */
+.agroepecas-filters-section,
+.agroepecas-results-section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--agroepecas-gray-200);
+    transition: box-shadow 0.3s ease;
+}
+
+.agroepecas-filters-section:hover,
+.agroepecas-results-section:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.agroepecas-section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--agroepecas-secondary);
+    text-align: center;
+    margin: 0 0 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.agroepecas-icon {
+    font-size: 1.75rem;
+}
+
+/* Filters Grid */
+.agroepecas-filters-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 640px) {
+    .agroepecas-filters-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .agroepecas-filters-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.agroepecas-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.agroepecas-filter-label {
+    font-weight: 500;
+    color: var(--agroepecas-secondary);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.agroepecas-select {
+    border: 2px solid var(--agroepecas-gray-300);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    background-color: white;
+    color: var(--agroepecas-secondary);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+    appearance: none;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+}
+
+.agroepecas-select:focus {
+    outline: none;
+    border-color: var(--agroepecas-primary);
+    box-shadow: 0 0 0 3px rgba(238, 136, 0, 0.1);
+}
+
+.agroepecas-select:hover {
+    border-color: var(--agroepecas-primary);
+}
+
+/* Buttons */
+.agroepecas-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.agroepecas-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.agroepecas-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.agroepecas-btn:hover::before {
+    left: 100%;
+}
+
+.agroepecas-btn-primary {
+    background: linear-gradient(135deg, var(--agroepecas-primary) 0%, var(--agroepecas-primary-dark) 100%);
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(238, 136, 0, 0.3);
+}
+
+.agroepecas-btn-primary:hover {
+    background: linear-gradient(135deg, var(--agroepecas-primary-dark) 0%, #b85c00 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px -1px rgba(238, 136, 0, 0.4);
+}
+
+.agroepecas-btn-secondary {
+    background: linear-gradient(135deg, var(--agroepecas-gray-100) 0%, var(--agroepecas-gray-200) 100%);
+    color: var(--agroepecas-gray-700);
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+}
+
+.agroepecas-btn-secondary:hover {
+    background: linear-gradient(135deg, var(--agroepecas-gray-200) 0%, var(--agroepecas-gray-300) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
+}
+
+.agroepecas-btn-icon {
+    font-size: 1rem;
+}
+
+/* Loading */
+.agroepecas-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+.agroepecas-loading-spinner {
+    border: 4px solid rgba(238, 136, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid var(--agroepecas-primary);
+    width: 48px;
+    height: 48px;
+    animation: agroepecas-spin 1s linear infinite;
+}
+
+@keyframes agroepecas-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.agroepecas-loading p {
+    color: var(--agroepecas-gray-600);
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Table Styles */
+.agroepecas-table-container {
+    overflow-x: auto;
+    max-height: 600px;
+    overflow-y: auto;
+    border-radius: 8px;
+    border: 1px solid var(--agroepecas-gray-200);
+    margin-bottom: 1rem;
+}
+
+.agroepecas-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.875rem;
+}
+
+.agroepecas-table th {
+    background: linear-gradient(135deg, var(--agroepecas-primary) 0%, var(--agroepecas-primary-dark) 100%);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+    border-bottom: 2px solid var(--agroepecas-primary-dark);
+}
+
+.agroepecas-table td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--agroepecas-gray-200);
+    vertical-align: top;
+}
+
+.agroepecas-table tr:nth-child(even) {
+    background-color: rgba(238, 136, 0, 0.03);
+}
+
+.agroepecas-table tr:hover {
+    background-color: rgba(238, 136, 0, 0.08);
+    transform: scale(1.001);
+    transition: all 0.2s ease;
+}
+
+/* Messages */
+.agroepecas-message {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.agroepecas-message-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.agroepecas-message p {
+    color: var(--agroepecas-gray-600);
+    font-size: 1rem;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.agroepecas-message-warning {
+    background-color: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.agroepecas-message-warning p {
+    color: var(--agroepecas-warning);
+}
+
+/* Result Info */
+.agroepecas-result-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-top: 1px solid var(--agroepecas-gray-200);
+}
+
+.agroepecas-result-count {
+    font-size: 0.875rem;
+    color: var(--agroepecas-gray-600);
+}
+
+.agroepecas-result-count strong {
+    color: var(--agroepecas-primary);
+    font-weight: 600;
+}
+
+/* Footer */
+.agroepecas-footer {
+    background: linear-gradient(135deg, var(--agroepecas-gray-100) 0%, var(--agroepecas-gray-200) 100%);
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--agroepecas-gray-300);
+    margin-top: auto;
+}
+
+.agroepecas-footer p {
+    text-align: center;
+    color: var(--agroepecas-gray-600);
+    font-size: 0.875rem;
+    margin: 0;
+    font-weight: 400;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .agroepecas-container {
+        padding: 0 0.75rem;
+    }
+    
+    .agroepecas-filters-section,
+    .agroepecas-results-section {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .agroepecas-title {
+        font-size: 1.5rem;
+    }
+    
+    .agroepecas-section-title {
+        font-size: 1.25rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .agroepecas-buttons {
+        flex-direction: column;
+    }
+    
+    .agroepecas-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .agroepecas-table th,
+    .agroepecas-table td {
+        padding: 0.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .agroepecas-header,
+    .agroepecas-footer,
+    .agroepecas-filters-section {
+        display: none;
+    }
+    
+    .agroepecas-app {
+        background: white;
+    }
+    
+    .agroepecas-results-section {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+}
+
+/* Accessibility */
+.agroepecas-btn:focus,
+.agroepecas-select:focus {
+    outline: 2px solid var(--agroepecas-primary);
+    outline-offset: 2px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .agroepecas-app {
+        background: linear-gradient(135deg, var(--agroepecas-gray-900) 0%, var(--agroepecas-gray-800) 100%);
+    }
+    
+    .agroepecas-filters-section,
+    .agroepecas-results-section {
+        background: var(--agroepecas-gray-800);
+        border-color: var(--agroepecas-gray-700);
+        color: var(--agroepecas-gray-100);
+    }
+    
+    .agroepecas-section-title {
+        color: var(--agroepecas-gray-100);
+    }
+    
+    .agroepecas-select {
+        background-color: var(--agroepecas-gray-700);
+        border-color: var(--agroepecas-gray-600);
+        color: var(--agroepecas-gray-100);
+    }
+    
+    .agroepecas-table tr:nth-child(even) {
+        background-color: rgba(238, 136, 0, 0.05);
+    }
+}
+
+E agora o JavaScript com os filtros cascata funcionais:
+
+jQuery(document).ready(function($) {
+    let allData = [];
+    let tableColumns = [];
+    let currentTable = "";
+    let isLoading = false;
+    
+    // Initialize app
+    const appElement = $(".agroepecas-app");
+    currentTable = appElement.data("table");
+    
+    if (currentTable) {
+        loadData();
+    }
+    
+    // Event listeners
+    $("#agroepecas-btn-filtrar").on("click", applyFilters);
+    $("#agroepecas-btn-limpar").on("click", clearFilters);
+    
+    function loadData() {
+        if (isLoading) return;
+        
+        isLoading = true;
+        showLoading(true);
+        
+        $.ajax({
+            url: agroepecas_ajax.ajax_url,
+            type: "POST",
+            data: {
+                action: "agroepecas_get_data",
+                nonce: agroepecas_ajax.nonce,
+                table: currentTable
+            },
+            success: function(response) {
+                if (response.success) {
+                    tableColumns = response.data.columns;
+                    allData = response.data.data;
+                    
+                    createFilters();
+                    createTableHeaders();
+                    populateFilters();
+                    
+                    console.log(`✅ Dados carregados: ${allData.length} registros`);
+                } else {
+                    console.error("❌ Erro ao carregar dados:", response.data);
+                    showError("Erro ao carregar dados: " + response.data);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("❌ Erro AJAX:", error);
+                showError("Erro ao conectar com o servidor. Verifique sua conexão.");
+            },
+            complete: function() {
+                isLoading = false;
+                showLoading(false);
+            }
+        });
+    }
+    
+    function createFilters() {
+        const filtersContainer = $("#agroepecas-filters-container");
+        filtersContainer.empty();
+        
+        // Skip ID column and create filters for other columns
+        const filterColumns = tableColumns.filter(col => 
+            col.Field.toLowerCase() !== "id" && 
+            col.Field.toLowerCase() !== "created_at" &&
+            col.Field.toLowerCase() !== "updated_at"
+        );
+        
+        filterColumns.forEach(function(column) {
+            const fieldName = column.Field;
+            const fieldLabel = formatFieldLabel(fieldName);
+            
+            const filterGroup = $(`
+                <div class="agroepecas-filter-group">
+                    <label class="agroepecas-filter-label" for="agroepecas-${fieldName}">
+                        ${fieldLabel}
+                    </label>
+                    <select id="agroepecas-${fieldName}" 
+                            class="agroepecas-select" 
+                            data-column="${fieldName}"
+                            aria-label="Filtro para ${fieldLabel}">
+                        <option value="">Todos</option>
+                    </select>
+                </div>
+            `);
+            
+            filtersContainer.append(filterGroup);
+        });
+        
+        // Add change event listeners for cascading filters
+        $(".agroepecas-select").on("change", function() {
+            updateDependentFilters($(this).data("column"));
+        });
+    }
+    
+    function formatFieldLabel(fieldName) {
+        return fieldName
+            .split('_')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    }
+    
+    function createTableHeaders() {
+        const tableHead = $("#agroepecas-table-head");
+        tableHead.empty();
+        
+        const headerRow = $("<tr>");
+        
+        tableColumns.forEach(function(column) {
+            if (column.Field.toLowerCase() !== "id" && 
+                column.Field.toLowerCase() !== "created_at" &&
+                column.Field.toLowerCase() !== "updated_at") {
+                const fieldLabel = formatFieldLabel(column.Field);
+                headerRow.append(`<th>${fieldLabel}</th>`);
+            }
+        });
+        
+        tableHead.append(headerRow);
+    }
+    
+    function populateFilters() {
+        const filters = {};
+        
+        // Initialize filter sets
+        $(".agroepecas-select").each(function() {
+            const column = $(this).data("column");
+            if (column) {
+                filters[column] = new Set();
+            }
+        });
+        
+        // Populate filter options from data
+        allData.forEach(function(item) {
+            Object.keys(filters).forEach(function(column) {
+                if (item[column] && item[column] !== "" && item[column] !== null) {
+                    filters[column].add(item[column]);
+                }
+            });
+        });
+        
+        // Update select options
+        Object.keys(filters).forEach(function(column) {
+            const select = $("#agroepecas-" + column);
+            const sortedValues = Array.from(filters[column]).sort((a, b) => {
+                // Try to sort numerically if possible, otherwise alphabetically
+                const numA = parseFloat(a);
+                const numB = parseFloat(b);
+                if (!isNaN(numA) && !isNaN(numB)) {
+                    return numA - numB;
+                }
+                return a.toString().localeCompare(b.toString());
+            });
+            
+            select.find("option:not(:first)").remove();
+            
+            sortedValues.forEach(function(value) {
+                select.append($("<option>", {
+                    value: value,
+                    text: value
+                }));
+            });
+        });
+    }
+    
+    function updateDependentFilters(changedColumn) {
+        const currentFilters = {};
+        
+        // Get current filter values
+        $(".agroepecas-select").each(function() {
+            const column = $(this).data("column");
+            if (column) {
+                currentFilters[column] = $(this).val();
+            }
+        });
+        
+        // Filter data based on current selections
+        let filteredData = allData.slice();
+        
+        Object.keys(currentFilters).forEach(function(key) {
+            if (currentFilters[key] && currentFilters[key] !== "") {
+                filteredData = filteredData.filter(function(item) {
+                    return item[key] && item[key].toString() === currentFilters[key];
+                });
+            }
+        });
+        
+        // Update dependent filters
+        Object.keys(currentFilters).forEach(function(column) {
+            if (column === changedColumn) return; // Skip the changed column
+            
+            const select = $("#agroepecas-" + column);
+            const currentValue = select.val();
+            
+            // Don't update if this select is currently focused
+            if (select.is(":focus")) return;
+            
+            // Clear existing options except "Todos"
+            select.find("option:not(:first)").remove();
+            
+            // Get unique values for this column from filtered data
+            const uniqueValues = new Set();
+            filteredData.forEach(function(item) {
+                if (item[column] && item[column] !== "" && item[column] !== null) {
+                    uniqueValues.add(item[column]);
+                }
+            });
+            
+            // Sort and add options
+            const sortedValues = Array.from(uniqueValues).sort((a, b) => {
+                const numA = parseFloat(a);
+                const numB = parseFloat(b);
+                if (!isNaN(numA) && !isNaN(numB)) {
+                    return numA - numB;
+                }
+                return a.toString().localeCompare(b.toString());
+            });
+            
+            sortedValues.forEach(function(value) {
+                select.append($("<option>", {
+                    value: value,
+                    text: value
+                }));
+            });
+            
+            // Restore previous value if it still exists
+            if (currentValue && sortedValues.includes(currentValue)) {
+                select.val(currentValue);
+            } else if (currentValue && !sortedValues.includes(currentValue)) {
+                select.val(""); // Clear if previous value no longer available
+            }
+        });
+    }
+    
+    function applyFilters() {
+        if (isLoading) return;
+        
+        isLoading = true;
+        showLoading(true);
+        hideMessages();
+        
+        const filters = {};
+        
+        $(".agroepecas-select").each(function() {
+            const column = $(this).data("column");
+            if (column) {
+                filters[column] = $(this).val();
+            }
+        });
+        
+        // Check if any filters are selected
+        const hasFilters = Object.values(filters).some(value => value !== "");
+        
+        if (!hasFilters) {
+            showMessage("Por favor, selecione pelo menos um filtro.", "warning");
+            isLoading = false;
+            showLoading(false);
+            return;
+        }
+        
+        $.ajax({
+            url: agroepecas_ajax.ajax_url,
+            type: "POST",
+            data: {
+                action: "agroepecas_filter_data",
+                nonce: agroepecas_ajax.nonce,
+                table: currentTable,
+                filters: filters
+            },
+            success: function(response) {
+                if (response.success) {
+                    updateTable(response.data);
+                    console.log(`🔍 Filtros aplicados: ${response.data.length} resultados`);
+                } else {
+                    console.error("❌ Erro ao filtrar dados:", response.data);
+                    showError("Erro ao filtrar dados: " + response.data);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("❌ Erro AJAX:", error);
+                showError("Erro ao conectar com o servidor. Tente novamente.");
+            },
+            complete: function() {
+                isLoading = false;
+                showLoading(false);
+            }
+        });
+    }
+    
+    function clearFilters() {
+        // Reset all select values
+        $(".agroepecas-select").val("");
+        
+        // Clear table
+        $("#agroepecas-result-table").empty();
+        
+        // Show initial message
+        showMessage("Selecione os filtros desejados e clique em 'Filtrar' para ver os resultados.", "info");
+        
+        // Reset result count
+        $("#agroepecas-result-count").text("0");
+        
+        // Repopulate all filters with original data
+        populateFilters();
+        
+        console.log("🧹 Filtros limpos");
+    }
+    
+    function updateTable(filteredData) {
+        const tableBody = $("#agroepecas-result-table");
+        const resultCount = $("#agroepecas-result-count");
+        
+        tableBody.empty();
+        resultCount.text(filteredData.length);
+        
+        hideMessages();
+        
+        if (filteredData.length === 0) {
+            showMessage("Nenhum resultado encontrado para os filtros selecionados. Tente ajustar os critérios de busca.", "warning");
+        } else {
+            filteredData.forEach(function(item, index) {
+                const row = $("<tr>");
+                
+                tableColumns.forEach(function(column) {
+                    if (column.Field.toLowerCase() !== "id" && 
+                        column.Field.toLowerCase() !== "created_at" &&
+                        column.Field.toLowerCase() !== "updated_at") {
+                        const cellValue = item[column.Field] || "";
+                        const cell = $("<td>").text(cellValue);
+                        row.append(cell);
+                    }
+                });
+                
+                // Add subtle animation delay for each row
+                row.css({
+                    opacity: 0,
+                    transform: 'translateY(10px)'
+                }).delay(index * 50).animate({
+                    opacity: 1
+                }, 300).css('transform', 'translateY(0)');
+                
+                tableBody.append(row);
+            });
+        }
+    }
+    
+    function showLoading(show) {
+        if (show) {
+            $("#agroepecas-loading").show();
+            $("#agroepecas-btn-filtrar").prop("disabled", true).text("Carregando...");
+        } else {
+            $("#agroepecas-loading").hide();
+            $("#agroepecas-btn-filtrar").prop("disabled", false).html('<span class="agroepecas-btn-icon">🔍</span> Filtrar');
+        }
+    }
+    
+    function hideMessages() {
+        $("#agroepecas-initial-message").hide();
+        $("#agroepecas-no-results").hide();
+    }
+    
+    function showMessage(message, type = "info") {
+        hideMessages();
+        
+        if (type === "warning") {
+            $("#agroepecas-no-results").show().find("p").text(message);
+        } else {
+            $("#agroepecas-initial-message").show().find("p").text(message);
+        }
+    }
+    
+    function showError(message) {
+        console.error("❌ " + message);
+        alert("Erro: " + message);
+    }
+    
+    // Add keyboard shortcuts
+    $(document).on("keydown", function(e) {
+        // Ctrl/Cmd + Enter to apply filters
+        if ((e.ctrlKey || e.metaKey) && e.keyCode === 13) {
+            e.preventDefault();
+            applyFilters();
+        }
+        
+        // Escape to clear filters
+        if (e.keyCode === 27) {
+            clearFilters();
+        }
+    });
+    
+    // Add tooltips for better UX
+    $(".agroepecas-btn-primary").attr("title", "Aplicar filtros selecionados (Ctrl+Enter)");
+    $(".agroepecas-btn-secondary").attr("title", "Limpar todos os filtros (Esc)");
+});
